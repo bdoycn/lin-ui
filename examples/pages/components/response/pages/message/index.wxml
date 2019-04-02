@@ -9,8 +9,5 @@
     </content-card>
   </content-title>
 
-  <l-message  content="{{content}}" 
-              type="{{type}}" 
-              duration="{{ duration}}" 
-              show="{{show}}" />
+  <l-message />
 </view>

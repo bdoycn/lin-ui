@@ -14,8 +14,7 @@ Page({
     const messageType = Number(e.target.dataset.type);
     switch (messageType) {
       case 0:
-        this.setData({
-          show: true,
+        wx.lin.showMessage({
           type: 'primary',
           icon: true,
           duration: 1500,
@@ -23,40 +22,35 @@ Page({
         })
         break
       case 1:
-        this.setData({
-          show: true,
+        wx.lin.showMessage({
           type: 'success',
           duration: 1500,
           content: '成功提示'
         })
         break
       case 2:
-        this.setData({
-          show: true,
+        wx.lin.showMessage({
           type: 'error',
           duration: 1500,
           content: '错误提示'
         })
         break
       case 3:
-        this.setData({
-          show: true,
+        wx.lin.showMessage({
           type: 'warning',
           duration: 1500,
-          content:'警告提示'
+          content: '警告提示'
         })
         break
       case 4:
-        this.setData({
-          show: true,
+        wx.lin.showMessage({
           type: 'primary',
           duration: 1500,
           content: '无图标提示'
         })
         break
       case 5:
-        this.setData({
-          show: true,
+        wx.lin.showMessage({
           type: 'primary',
           duration: 4000,
           content: '提示4s后消失'
