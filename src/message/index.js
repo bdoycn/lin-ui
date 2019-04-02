@@ -8,13 +8,17 @@ Component({
         this.setData({
           status: true
         })
-        setTimeout(() => {
-          this.setData({
-            status: false
-          })
-          this.properties.show = false
-          if (this.data.success) this.data.success()
-        }, this.properties.duration)
+        if (this.data.timer) {
+          clearTimeout(this.data.timer)
+        } else {
+          setTimeout(() => {
+            this.setData({
+              status: false
+            })
+            this.properties.show = false
+            if (this.data.success) this.data.success()
+          }, this.properties.duration)
+        }
       }
     },
     duration: {
@@ -40,7 +44,8 @@ Component({
   },
 
   data: {
-    status: false
+    status: false,
+    timer: null
   },
 
   attached() {
@@ -51,6 +56,7 @@ Component({
 
   lifetimes: {
     show() {
+      if (this.data.timer) clearTimeout(this.data.timer)
       if (this.data.openApi) {
         this.initMessage();
       }
