@@ -10,6 +10,22 @@ const config = {
 Component({
   externalClasses: ['l-class', 'l-image-class'],
   properties: {
+    show: Boolean,
+    icon: String,
+    image: String,
+    content: String,
+    type: {
+      type: String,
+      value: 'primary'
+    },
+    duration: {
+      type: Number,
+      value: 1500
+    },
+    openApi: {
+      type: Boolean,
+      value: true
+    }
   },
 
   data: {
@@ -17,14 +33,21 @@ Component({
     ...config
   },
 
-  attached() {
-    this.initMessage();
+  observers: {
+    'show': function(show) {
+      show && this.changeStatus()
+    }
   },
+
 
   lifetimes: {
     show() {
-      this.initMessage();
+      this.data.openApi && this.initMessage();
     },
+
+    attached() {
+      this.data.openApi && this.initMessage();
+    }
   },
 
   methods: {
@@ -33,11 +56,11 @@ Component({
       wx.lin.showMessage = (options) => {
         const {
           content = config.content,
-          icon = config.icon,
-          image = config.image,
-          type = config.type,
-          duration = config.duration,
-          success = config.success
+            icon = config.icon,
+            image = config.image,
+            type = config.type,
+            duration = config.duration,
+            success = config.success
         } = options;
         this.data.success = success
         this.setData({
@@ -61,9 +84,10 @@ Component({
         this.setData({
           status: false
         })
-        if (this.data.success) this.data.success()
+        this.data.show = false
         this.data.timer = null
+        if (this.data.success) this.data.success()
       }, this.properties.duration)
     }
   }
-});
+})
